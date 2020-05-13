@@ -84,4 +84,10 @@ use this for is to whitelist role accounts (abuse@, postmaster@ ...) so mail to 
 
 ### virtual
 
-This file defines virtual aliases.
+This file defines virtual aliases that don't correspond to real user accounts on the system. You can use it to 
+create catch-alls, to forward some aliases to other email addresses, to blackhole certain recipients, etc.
+
+### virtual_domains
+
+If your mail server is going to accept messages for more than one domain, the additional domains should be 
+specified in this file.
