@@ -1,0 +1,8 @@
+# The primary domain for the mail server should be defined with the "myhostname"
+# or "mydomain" variables in main.cf.
+#
+# If the server should accept mail for _additional_ domains, list those here.
+
+otherdomain.example	    	#virtual
+sub.otherdomain.example     #virtual
+yetanotherdomain.example    #virtual

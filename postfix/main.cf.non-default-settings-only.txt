@@ -1,0 +1,108 @@
+alias_database = hash:/etc/aliases
+alias_maps = hash:/etc/aliases
+bounce_queue_lifetime = 1d
+broken_sasl_auth_clients = yes
+command_directory = /usr/sbin
+confirm_delay_cleared = yes
+daemon_directory = /usr/libexec/postfix
+data_directory = /var/lib/postfix
+debug_peer_level = 2
+debugger_command =
+         PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
+         ddd $daemon_directory/$process_name $process_id & sleep 5
+delay_warning_time = 15m
+disable_vrfy_command = yes
+home_mailbox = mail/
+html_directory = no
+inet_interfaces = all
+lmtp_tls_mandatory_protocols = !SSLv2, !SSLv3
+lmtp_tls_protocols = !SSLv2, !SSLv3
+mail_owner = postfix
+mailbox_command = /usr/bin/procmailheader_checks = regexp:/etc/postfix/header_checks
+mailbox_size_limit = 102400001
+mailq_path = /usr/bin/mailq.postfix
+manpage_directory = /usr/share/man
+maximal_queue_lifetime = 1d
+message_size_limit = 102400000
+milter_default_action   = accept
+milter_protocol         = 2
+mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+mydomain = domain.example
+myhostname = mail.domain.example
+myhostname = mail.domain.examplemyorigin = $mydomaininet_protocols = ipv4
+mynetworks = 127.0.0.0/8
+myorigin = $mydomain
+newaliases_path = /usr/bin/newaliases.postfix
+non_smtpd_milters       = $smtpd_milters
+notify_classes = bounce, delay, protocol, resource, software
+queue_directory = /var/spool/postfix
+readme_directory = /usr/share/doc/postfix-2.6.6/README_FILES
+sample_directory = /usr/share/doc/postfix-2.6.6/samples
+sendmail_path = /usr/sbin/sendmail.postfix
+setgid_group = postdrop
+smtp_tls_CAfile = /etc/pki/tls/cert.pem
+smtp_tls_ciphers = medium
+smtp_tls_loglevel = 1
+smtp_tls_mandatory_protocols = !TLSv1, !TLSV1.1, !SSLv2, !SSLv3
+smtp_tls_note_starttls_offer = yes
+smtp_tls_protocols = !TLSv1, !TLSv1.1, !SSLv2, !SSLv3
+smtp_tls_security_level=may
+smtpd_banner = $myhostname ESMTP
+smtpd_discard_ehlo_keywords = silent-discard, dsn
+smtpd_milters           = inet:127.0.0.1:8891, inet:127.0.0.1:8893
+smtpd_recipient_restrictions =
+    permit_mynetworks,
+    permit_sasl_authenticated,
+    reject_unauth_destination,
+    reject_invalid_hostname,
+    reject_unknown_recipient_domain,
+    reject_unauth_pipelining,
+    check_client_access cidr:/etc/postfix/ip_cidr_checks,
+    check_recipient_access hash:/etc/postfix/recipient_whitelist,
+    reject_rbl_client dnsbl.dronebl.org,
+    reject_rbl_client sbl-xbl.spamhaus.org,
+    reject_rbl_client psbl.surriel.com,
+    reject_rbl_client cbl.abuseat.org,
+    reject_rbl_client dyna.spamrats.com,
+    reject_rbl_client auth.spamrats.com,
+    reject_rbl_client noptr.spamrats.com,
+    reject_rbl_client 0spam.fusionzero.com,
+    reject_rbl_client spam.dnsbl.anonmails.de,
+    reject_rbl_client truncate.gbudb.net,
+    reject_rbl_client bl.spameatingmonkey.net,
+    reject_rbl_client all.s5h.net,
+    reject_rbl_client bl.fmb.la,
+    reject_rbl_client rbl.rbldns.ru,
+    reject_rbl_client new.spam.dnsbl.sorbs.net,
+    reject_rbl_client dnsbl.cobion.com,
+    reject_rbl_client dnsbl.zapbl.net,
+    reject_rbl_client ubl.unsubscore.com,
+    reject_rbl_client blackholes.tepucom.nl,
+    reject_rbl_client db.wpbl.info,
+    reject_rbl_client spambot.bls.digibase.ca,
+    reject_rbl_client bl.mailspike.net
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_tls_security_options = noanonymous
+smtpd_sasl_type = cyrus
+smtpd_tls_CAfile = /etc/pki/tls/cert.pem
+smtpd_tls_auth_only = no
+smtpd_tls_cert_file = /etc/letsencrypt/live/mail.domain.example/fullchain.pem
+smtpd_tls_ciphers = medium
+smtpd_tls_dh1024_param_file = /etc/postfix/ssl/dh_2048.pem
+smtpd_tls_dh512_param_file = /etc/postfix/ssl/dh_512.pem
+smtpd_tls_eecdh_grade = strong
+smtpd_tls_exclude_ciphers = aNULL, eNULL, EXPORT, CAMELLIA, DES, 3DES, IDEA, RC4, MD5, PSK, aECDH, EDH-DSS-DES-CBC3-SHA, EDH-RSA-DES-CBC3-SHA, ECDHE-RSA-RC4-SHA, KRB5-DES, CBC3-SHA, DHE-RSA-SEED-SHA, SEED-SHA, RSA-WITH-AES-128-GCM-SHA256, RSA-WITH-AES-256-GCM-SHA384, RSA-WITH-AES-128-CBC-SHA256, RSA-WITH-AES-256-CBC-SHA256, RSA-WITH-AES-128-CBC-SHA, RSA-WITH-AES-256-CBC-SHA, AES128-GCM-SHA256, AES128-SHA, AES128-SHA256, AES256-GCM-SHA384, AES256-SHA, AES256-SHA256
+smtpd_tls_key_file = /etc/letsencrypt/live/mail.domain.example/privkey.pem
+smtpd_tls_loglevel = 1
+smtpd_tls_mandatory_exclude_ciphers = aNULL, eNULL, EXPORT, CAMELLIA, DES, 3DES, IDEA, RC4, MD5, PSK, aECDH, EDH-DSS-DES-CBC3-SHA, EDH-RSA-DES-CBC3-SHA, ECDHE-RSA-RC4-SHA, KRB5-DES, CBC3-SHA, DHE-RSA-SEED-SHA, SEED-SHA, RSA-WITH-AES-128-GCM-SHA256, RSA-WITH-AES-256-GCM-SHA384, RSA-WITH-AES-128-CBC-SHA256, RSA-WITH-AES-256-CBC-SHA256, RSA-WITH-AES-128-CBC-SHA, RSA-WITH-AES-256-CBC-SHA, AES128-GCM-SHA256, AES128-SHA, AES128-SHA256, AES256-GCM-SHA384, AES256-SHA, AES256-SHA256
+smtpd_tls_mandatory_protocols = !TLSv1, !TLSv1.1, !SSLv2, !SSLv3
+smtpd_tls_protocols = !TLSv1, !TLSv1.1, !SSLv2, !SSLv3
+smtpd_tls_received_header = yes
+smtpd_tls_security_level=may
+smtpd_tls_session_cache_timeout = 3600s
+tls_random_source = dev:/dev/urandom
+tlsproxy_tls_mandatory_protocols = $smtpd_tls_mandatory_protocols
+tlsproxy_tls_protocols = $smtpd_tls_protocols
+unknown_local_recipient_reject_code = 550
+virtual_alias_domains = hash:/etc/postfix/virtual_domains
+virtual_alias_maps = hash:/etc/postfix/virtual

@@ -1,0 +1,8 @@
+# Mail to addresses in this file will bypass DNSBL and milter checks. Specify
+# common role aliases here to ensure you don't accidentally bounce mail to them.
+# To whitelist an alias across _all_ domains served by Postfix, omit the
+# hostname from the address.
+
+abuse@         OK
+postmaster@    OK
+security@      OK

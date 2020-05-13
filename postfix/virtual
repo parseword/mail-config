@@ -1,0 +1,30 @@
+# Virtual account management
+
+# Catch-alls: Messages addressed to non-existent users of the domain on the
+# left hand side will be delivered to the address on the right hand side. This
+# allows for handing out vendor-specific or "throwaway" addresses on the fly,
+# without having to actually create any accounts. When a vendor-specific or 
+# "throwaway" address is no longer needed, it can be added to the blackholes 
+# section below.
+
+@domain.example parseword@domain.example
+@otherdomain.example parseword@domain.example
+@sub.otherdomain.example parseword@domain.example
+@yetanotherdomain.example parseword@domain.example
+
+# Mailing lists: Messages to an alias are sent to multiple local user accounts
+
+mail-users@domain.example parseword,alice,bob,carol,dave,eve
+
+# Custom aliases: These will override the catch-alls
+
+phonepager@domain.example 9015551212@messaging.sprintpcs.com
+alice@domain.example alice@some.offsite.system
+
+# Blackholes: Mail gets accepted, but goes to /dev/null.
+# Using this feature requires the following entry in /etc/aliases:
+# devnull: /dev/null
+# To reject messages instead, use the header_checks file.
+
+macobserver@domain.example devnull@localhost
+genghisgrill@domain.example devnull@localhost
